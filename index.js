@@ -17,7 +17,8 @@ exports.options = {
     '--owner': 'limits searches to a specific user or repository, you can also '
         + 'search `ecomfe/xx` to specify the owner (GitHub)',
     '--stars': 'searches repositories based on the number of stars, e.g, `10..20`, `>=500` (GitHub)',
-    '--language': 'searches repositories based on the language they\'re written in, default: `javascript` (GitHub)'
+    '--language': 'searches repositories based on the language they\'re written in, default: `javascript` (GitHub)',
+    '--registry <url>': 'set the npm default registry to use'
 };
 
 exports.run = function (argv, cli, env) {
@@ -29,7 +30,8 @@ exports.run = function (argv, cli, env) {
     var query = argv._.join(' ');
     var options = {
         root: env.cwd,
-        useCache: argv.cache || argv.c
+        useCache: argv.cache || argv.c,
+        registry: argv.registry
     };
     ['sort', 'order', 'in', 'owner', 'stars', 'language'].forEach(function (key) {
         options[key] = argv[key];
